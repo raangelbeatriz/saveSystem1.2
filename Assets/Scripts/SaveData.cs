@@ -10,6 +10,7 @@ public class SaveData
     public int life;
     public Vector3 respawnPoint;
     public bool[] coinValues;
+    public List<CoinClass> coinsList;
 
     public string getSaveName()
     {

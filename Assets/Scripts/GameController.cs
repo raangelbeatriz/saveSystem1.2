@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI coinText;
     public Vector3 respawnPoint;
     public GameObject[] coins;
-    public bool[] coinValues;
+    public List<CoinClass> coinsList = new List<CoinClass>();
     private void Awake()
     {
         gameController = this;
@@ -29,22 +29,15 @@ public class GameController : MonoBehaviour
             respawnPoint = SaveManager.sv.activeSave.respawnPoint;
             Player.player.transform.position = respawnPoint;
 
-            coinValues = SaveManager.sv.activeSave.coinValues;
-            
-            
-            for (int x = 0; x < coinValues.Length; x++)
+            coinsList = SaveManager.sv.activeSave.coinsList;
+
+            for(int i = 0; i < coinsList.Count; i++)
             {
-                if (coinValues[x] == true)
+                if (coinsList[i].active == false)
                 {
-                    coins[x].SetActive(false);
+                    coins[i].SetActive(false);
                 }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < coins.Length; i++)
-            {
-                coinValues[i] = false;
+
             }
         }
 
@@ -66,12 +59,15 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void collectCoin(int id)
+    public void collectCoin(CoinClass item)
     {
         coin += 1;
-        coinValues[id] = true;
+        CoinClass coinClass = new CoinClass();
+        coinClass.id = item.id;
+        coinClass.active = item.active;
+        coinsList.Add(coinClass);
         SaveManager.sv.activeSave.coin = coin;
-        SaveManager.sv.activeSave.coinValues = coinValues;
+        SaveManager.sv.activeSave.coinsList = coinsList;
         SaveManager.sv.Save();
     }
 
