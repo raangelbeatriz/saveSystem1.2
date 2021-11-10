@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
 
     public bool hasLoad = false;
 
+
     public void Awake()
     {
         sv = this;

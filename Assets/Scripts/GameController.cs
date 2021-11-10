@@ -13,12 +13,11 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI lifeText;
     public TextMeshProUGUI coinText;
     public Vector3 respawnPoint;
-
+    public GameObject[] coins;
+    public bool[] coinValues;
     private void Awake()
     {
         gameController = this;
-
-
     }
     void Start()
     {
@@ -29,7 +28,26 @@ public class GameController : MonoBehaviour
             print(SaveManager.sv.activeSave.respawnPoint);
             respawnPoint = SaveManager.sv.activeSave.respawnPoint;
             Player.player.transform.position = respawnPoint;
+
+            coinValues = SaveManager.sv.activeSave.coinValues;
+            
+            
+            for (int x = 0; x < coinValues.Length; x++)
+            {
+                if (coinValues[x] == true)
+                {
+                    coins[x].SetActive(false);
+                }
+            }
         }
+        else
+        {
+            for (int i = 0; i < coins.Length; i++)
+            {
+                coinValues[i] = false;
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -48,10 +66,12 @@ public class GameController : MonoBehaviour
     }
 
 
-    public void collectCoin()
+    public void collectCoin(int id)
     {
         coin += 1;
+        coinValues[id] = true;
         SaveManager.sv.activeSave.coin = coin;
+        SaveManager.sv.activeSave.coinValues = coinValues;
         SaveManager.sv.Save();
     }
 

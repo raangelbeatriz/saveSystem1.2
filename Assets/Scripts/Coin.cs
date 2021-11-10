@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-
+    public int id;
+    public bool active = true;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("player"))
         {
-            GameController.gameController.collectCoin(); 
+            GameController.gameController.collectCoin(id);
+            active = false;
             Destroy(this.gameObject);
         }
     }
