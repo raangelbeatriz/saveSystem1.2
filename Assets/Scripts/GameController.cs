@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
     public void playerHit()
     {
         life -= 1;
+        Player.player.transform.position = respawnPoint;
     }
 
 
