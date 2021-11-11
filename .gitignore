@@ -42,3 +42,6 @@ Logs/AssetImportWorker0.log
 Logs/AssetImportWorker1-prev.log
 Logs/AssetImportWorker2-prev.log
 Logs/shadercompiler-UnityShaderCompiler.exe0.log
+UserSettings/EditorUserSettings.asset
+Logs/shadercompiler-UnityShaderCompiler.exe2.log
+Logs/shadercompiler-UnityShaderCompiler.exe1.log
