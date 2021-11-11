@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -57,6 +58,10 @@ public class GameController : MonoBehaviour
     {
         life -= 1;
         Player.player.transform.position = respawnPoint;
+        if(life <= 0)
+        {
+            endGame();
+        }
     }
 
 
@@ -83,5 +88,11 @@ public class GameController : MonoBehaviour
         SaveManager.sv.activeSave.coinsList = coinsList;
         SaveManager.sv.activeSave.respawnPoint = respawnPoint;
         SaveManager.sv.Save();
+    }
+
+    void endGame()
+    {
+        SaveManager.sv.DeleteSavedFile();
+        SceneManager.LoadScene("Game");
     }
 }

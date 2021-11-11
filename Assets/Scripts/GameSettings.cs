@@ -8,27 +8,34 @@ public class GameSettings : MonoBehaviour
 {
     public float volumeValue;
 
-    public Slider slider;
+    public static GameSettings gameSettings;
 
-    public TextMeshProUGUI volumeText;
-
-    public void Start()
+    public void Awake()
     {
+        if (gameSettings == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            gameSettings = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         volumeValue = PlayerPrefs.GetFloat("volume", 50);
-        slider.value = volumeValue;
-        volumeText.text = volumeValue.ToString("0.0");
-        
+
     }
 
-    public void volumeSlider()
+
+    public void saveVolume(float value)
     {
-        volumeText.text = slider.value.ToString("0.0");
-    }
-    public void setVolumeValue()
-    {
-        volumeValue = slider.value;
+        volumeValue = value;
         PlayerPrefs.SetFloat("volume", volumeValue);
         PlayerPrefs.Save();
+    }
+
+    public void Delete()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
 }
