@@ -37,3 +37,8 @@ sysinfo.txt
 *.unitypackage
 Logs/AssetImportWorker2.log
 Logs/AssetImportWorker2.log
+Logs/AssetImportWorker0-prev.log
+Logs/AssetImportWorker0.log
+Logs/AssetImportWorker1-prev.log
+Logs/AssetImportWorker2-prev.log
+Logs/shadercompiler-UnityShaderCompiler.exe0.log
