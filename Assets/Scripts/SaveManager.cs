@@ -13,9 +13,6 @@ public class SaveManager : MonoBehaviour
 
     private string dataPath;
 
-    public bool hasLoad = false;
-
-
     public void Awake()
     {
         sv = this;
@@ -29,13 +26,7 @@ public class SaveManager : MonoBehaviour
 
     public void Save()
     {
-        var serializer = new XmlSerializer(typeof(SaveData));
-        var stream = new FileStream(dataPath + "/" + activeSave.getSaveName() + ".save", FileMode.Create);
-
-        serializer.Serialize(stream, activeSave);
-        stream.Close();
-
-        Debug.Log("Saved");
+        //var stream = new FileStream(dataPath + "/" + activeSave.getSaveName() + ".save", FileMode.Create);
     }
 
     public void Load()

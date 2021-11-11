@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
-    private string saveName = "test";
+    private string saveName = "saveData";
 
     public string getSaveName()
     {
