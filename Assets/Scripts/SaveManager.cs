@@ -20,33 +20,19 @@ public class SaveManager : MonoBehaviour
     {
         sv = this;
         dataPath = Application.persistentDataPath;
-        Debug.Log(dataPath + "/" + activeSave.getSaveName() + ".save");
-        Load();
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Save();
-        }
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Load();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            DeleteSavedFile();
-        }
     }
 
     public void Save()
     {
-        var serializer = new XmlSerializer(typeof(SaveData)); //Type of element you're saving
-        var stream = new FileStream(dataPath + "/" + activeSave.getSaveName() + ".save", FileMode.Create); //Where you're saving
+        var serializer = new XmlSerializer(typeof(SaveData));
+        var stream = new FileStream(dataPath + "/" + activeSave.getSaveName() + ".save", FileMode.Create);
 
-        serializer.Serialize(stream, activeSave); //Where and the object
+        serializer.Serialize(stream, activeSave);
         stream.Close();
 
         Debug.Log("Saved");
@@ -54,25 +40,11 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
-        if (System.IO.File.Exists(dataPath + "/" + activeSave.getSaveName() + ".save"))
-        {
-            var serializer = new XmlSerializer(typeof(SaveData)); //Type of element you're saving
-            var stream = new FileStream(dataPath + "/" + activeSave.getSaveName() + ".save", FileMode.Open);
 
-            activeSave = serializer.Deserialize(stream) as SaveData;
-            stream.Close();
-
-            hasLoad = true;
-        }
     }
 
     public void DeleteSavedFile()
     { 
 
-        if (System.IO.File.Exists(dataPath + "/" + activeSave.getSaveName() + ".save"))
-        {
-            File.Delete(dataPath + "/" + activeSave.getSaveName() + ".save");
-            Debug.Log("Deleted");
-        }
     }
 }

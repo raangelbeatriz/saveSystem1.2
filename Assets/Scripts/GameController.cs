@@ -34,44 +34,23 @@ public class GameController : MonoBehaviour
     }
     private void initializeGame()
     {
-        if (SaveManager.sv.hasLoad == true)
-        {
-            life = SaveManager.sv.activeSave.life;
-            coin = SaveManager.sv.activeSave.coin;
-            print(SaveManager.sv.activeSave.respawnPoint);
-            respawnPoint = SaveManager.sv.activeSave.respawnPoint;
-            Player.player.transform.position = respawnPoint;
-
-            coinsList = SaveManager.sv.activeSave.coinsList;
-
-            for (int i = 0; i < coinsList.Count; i++)
-            {
-                if (coinsList[i].active == false)
-                {
-                    coins[i].SetActive(false);
-                }
-
-            }
-        }
+       
     }
     public void playerHit()
     {
         life -= 1;
         Player.player.transform.position = respawnPoint;
-        if(life <= 0)
-        {
-            endGame();
-        }
+        
     }
 
 
     public void collectCoin(CoinClass item)
     {
         coin += 1;
-        CoinClass coinClass = new CoinClass();
+        /*CoinClass coinClass = new CoinClass();
         coinClass.id = item.id;
         coinClass.active = item.active;
-        coinsList.Add(coinClass);
+        coinsList.Add(coinClass); */
     }
 
     public void setRespawnPoint(Vector3 position)
@@ -83,11 +62,7 @@ public class GameController : MonoBehaviour
 
     public void saveState()
     {
-        SaveManager.sv.activeSave.life = life;
-        SaveManager.sv.activeSave.coin = coin;
-        SaveManager.sv.activeSave.coinsList = coinsList;
-        SaveManager.sv.activeSave.respawnPoint = respawnPoint;
-        SaveManager.sv.Save();
+
     }
 
     void endGame()
